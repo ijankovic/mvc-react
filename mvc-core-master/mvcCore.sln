@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{97A6DDA4-2318-45B2-A8CF-66E646A608F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF30494C-EBBA-40C7-A346-73ECE1F54E92}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "mvcCore.data", "src\mvcCore.data\mvcCore.data.xproj", "{15782E30-CF88-4543-A077-6DD78E990CF6}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "mvcCore.website", "src\mvcCore.website\mvcCore.website.xproj", "{B81DAEA8-903B-4C97-B850-B980C2C9016F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15782E30-CF88-4543-A077-6DD78E990CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15782E30-CF88-4543-A077-6DD78E990CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15782E30-CF88-4543-A077-6DD78E990CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15782E30-CF88-4543-A077-6DD78E990CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B81DAEA8-903B-4C97-B850-B980C2C9016F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B81DAEA8-903B-4C97-B850-B980C2C9016F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B81DAEA8-903B-4C97-B850-B980C2C9016F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B81DAEA8-903B-4C97-B850-B980C2C9016F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{15782E30-CF88-4543-A077-6DD78E990CF6} = {97A6DDA4-2318-45B2-A8CF-66E646A608F3}
+		{B81DAEA8-903B-4C97-B850-B980C2C9016F} = {97A6DDA4-2318-45B2-A8CF-66E646A608F3}
+	EndGlobalSection
+EndGlobal
