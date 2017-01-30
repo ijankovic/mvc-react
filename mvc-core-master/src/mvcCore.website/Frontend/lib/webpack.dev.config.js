@@ -10,7 +10,7 @@ module.exports = merge(
     },
     parts.entry(c.PATHS.app),
     parts.setupCSS(c.PATHS.style),
-    parts.processJS(c.PATHS.app),
+    parts.processJS(c.PATHS.root),
     {
         plugins: [
             new webpack.HotModuleReplacementPlugin()

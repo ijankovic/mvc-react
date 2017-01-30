@@ -1,8 +1,9 @@
 ﻿const path = require('path');
 
 exports.PATHS = {
-    app: path.join(__dirname, '../app'),
-    build: path.join(__dirname, '../../wwwroot/build')
+	app: path.join(__dirname, '../app/todo'),
+	root: path.join(__dirname, '../app'),
+  build: path.join(__dirname, '../../wwwroot/build')
 };
 
 exports.PROTOCOL = 'http';
