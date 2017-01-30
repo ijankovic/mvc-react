@@ -54,5 +54,11 @@ namespace mvcCore.website.Controllers
             _todoRepo.Save();
         }
 
-    }
+				[HttpDelete]
+				public void DeleteTodos([FromBody] int[] ids)
+				{
+					_todoRepo.RemoveRange(ids);
+					_todoRepo.Save();
+				}
+	}
 }

@@ -19,10 +19,12 @@ const getVisibleTodos = (todos, filter) => {
 };
 
 const mapStateToProps = (state) => {
+  let selectedCount = state.todos.filter(x => x.isSelected === true).size;
   return {
     todos: getVisibleTodos(state.todos, state.visibilityFilter),
-    selectedCount: state.todos.filter(x => x.isSelected === true).size,
-    total: state.todos.count()
+    selectedCount: selectedCount,
+    total: state.todos.count(),
+    disableDelete: selectedCount === 0
   };
 };
 

@@ -10,7 +10,8 @@ namespace mvcCore.data.Repositories
     {
         Todo GetById(int id);
         IEnumerable<Todo> GetAll();
-        void Add(Todo todo);
+				void RemoveRange(int[] ids);
+				void Add(Todo todo);
         void Remove(int id);
         void Update(Todo todo);
         void Save();

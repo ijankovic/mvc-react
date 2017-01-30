@@ -32,11 +32,11 @@ export const addTodoServer = (text) => {
   return dispatch => {
     //turnOnLoader(dispatch);
     return fetch(url, createPostRequest(JSON.stringify({ Text: text })))
-            .then(getResponseJson)
-            .then(todo => {
-              dispatch(addTodo(todo));
-              //turnOffLoader(dispatch);
-            });
+      .then(getResponseJson)
+      .then(todo => {
+        dispatch(addTodo(todo));
+        //turnOffLoader(dispatch);
+      });
   };
 };
 
@@ -55,13 +55,13 @@ export const toggleTodoServer = (todo) => {
   };
 
   return dispatch => {
-        //turnOnLoader(dispatch);
+    //turnOnLoader(dispatch);
     return fetch(url, createPutRequest(JSON.stringify(todoJson)))
-            .then(getResponseJson)
-            .then(todo => {
-              dispatch(updateTodo(todo));
-                //turnOffLoader(dispatch);
-            });
+      .then(getResponseJson)
+      .then(todo => {
+        dispatch(updateTodo(todo));
+        //turnOffLoader(dispatch);
+      });
   };
 };
 
@@ -74,7 +74,7 @@ export const toggleTodoSelection = (val, todo) => {
 };
 
 export const toggleAllSelections = (val) => {
-  return{
+  return {
     type: Const.actions.TOGGLE_ALL_SELECTIONS,
     val
   };
@@ -99,22 +99,20 @@ export const bulkDeleteServer = () => (dispatch, getState) => {
   const {todos} = getState();
   let selectedIds = todos.filter(x => x.isSelected).map(t => { return t.id; });
 
-  return dispatch => {
-    return fetch(url, createDeleteRequest(JSON.stringify(selectedIds)))
-            .then(() => {
-              dispatch(removeTodos(selectedIds));
-            });
-  };
+  return fetch(url, createDeleteRequest(JSON.stringify(selectedIds)))
+    .then(() => {
+      dispatch(removeTodos(selectedIds));
+    });
 };
 
 export const removeTodoServer = (id) => {
   return dispatch => {
-        //turnOnLoader(dispatch);
+    //turnOnLoader(dispatch);
     return fetch(url, createDeleteRequest(id.toString()))
-            .then(() => {
-              dispatch(removeTodo(id));
-                //turnOffLoader(dispatch);
-            });
+      .then(() => {
+        dispatch(removeTodo(id));
+        //turnOffLoader(dispatch);
+      });
   };
 };
 
@@ -131,10 +129,10 @@ export const loadAllTodosServer = () => {
   return dispatch => {
     turnOnLoader(dispatch);
     return fetch(url, createGetRequest())
-            .then(getResponseJson)
-            .then(todos => {
-              dispatch(addTodos(todos));
-              turnOffLoader(dispatch);
-            });
+      .then(getResponseJson)
+      .then(todos => {
+        dispatch(addTodos(todos));
+        turnOffLoader(dispatch);
+      });
   };
 };

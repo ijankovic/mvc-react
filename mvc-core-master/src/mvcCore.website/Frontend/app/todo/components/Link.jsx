@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 
-const Link = ({ active, canClick = true, children, onClick }) => {
+const Link = ({ active, disabled = false, children, onClick }) => {
   return (
         <Button  
             className='btn btn-link'
             active={active}
-            disabled={!canClick}                  
+            disabled={disabled}                  
             onClick={e => {
               e.preventDefault();
               onClick();
@@ -18,7 +18,7 @@ const Link = ({ active, canClick = true, children, onClick }) => {
 
 Link.propTypes = {
   active: PropTypes.bool,
-  canClick: PropTypes.bool,
+  disabled: PropTypes.bool,
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired
 };

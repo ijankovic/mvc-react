@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import Todo from './Todo';
 import Immutable from 'immutable';
-import { ButtonGroup, Table, Checkbox } from 'react-bootstrap';
+import { Table, Checkbox } from 'react-bootstrap';
 import Filter from '../components/Filter';
-import Link from './Link';
+import Alert from '../containers/Alert';
 
-const TodoList = ({ todos, selectedCount, total, onTodoComplete, onTodoRemove, onTodoToggle, onToggleAll, onBulkDelete }) => {
+const TodoList = ({ todos, selectedCount, total, disableDelete, onTodoComplete, onTodoRemove, onTodoToggle, onToggleAll, onBulkDelete }) => {
   const items = todos.map(todo => (
         <Todo
             key={todo.id}
@@ -15,33 +15,37 @@ const TodoList = ({ todos, selectedCount, total, onTodoComplete, onTodoRemove, o
             onRemove={() => onTodoRemove(todo.id)}
             />
     ));
-
   return (
-    <div>
-        <span className='pull-right'>
-            <span>Selected {selectedCount} / {total} </span>
-            <span><Link disabled={selectedCount == 0} onClick={onBulkDelete}>Bulk Delete</Link></span>
-        </span>
-        <Table striped hover>
-            <thead>
-                <tr>
-                    <th className='col-md-1'><Checkbox onChange={(e) => onToggleAll(e.target.checked)} /></th>
-                    <th className='col-md-1'>Id</th>
-                    <th className='col-md-1'>Done</th>
-                    <th className='col-md-8'>Text</th>
-                    <th className='col-md-2'></th>
-                </tr>
-            </thead>
-            <tbody>{items}</tbody>
-            <tfoot>
-                <tr>
-                    <td colSpan='4'>
-                        <Filter />
-                    </td>
-                </tr>
-            </tfoot>
-        </Table>
-    </div>
+        <div>
+            <Alert title='Bulk delete' onConfirm={onBulkDelete} disabled={disableDelete} btnText='Bulk Delete'>
+                <div>
+                    <h4>Are you sure you want to delete selected records?</h4>
+                </div>
+            </Alert>
+            <span className='pull-right'>
+                <span>Selected {selectedCount} / {total} </span>
+
+            </span>
+            <Table striped hover>
+                <thead>
+                    <tr>
+                        <th className='col-md-1'><Checkbox onChange={(e) => onToggleAll(e.target.checked)} /></th>
+                        <th className='col-md-1'>Id</th>
+                        <th className='col-md-1'>Done</th>
+                        <th className='col-md-8'>Text</th>
+                        <th className='col-md-2'></th>
+                    </tr>
+                </thead>
+                <tbody>{items}</tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan='4'>
+                            <Filter />
+                        </td>
+                    </tr>
+                </tfoot>
+            </Table>
+        </div>
     );
 };
 

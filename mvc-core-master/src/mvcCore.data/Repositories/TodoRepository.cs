@@ -38,7 +38,13 @@ namespace mvcCore.data.Repositories
             _ctx.Todos.Remove(todo);
         }
 
-        public void Update(Todo todo)
+				public void RemoveRange(int[] ids)
+				{
+					var todos = _ctx.Todos.Where(x => ids.Contains(x.Id)).ToList();
+					_ctx.Todos.RemoveRange(todos);
+				}
+
+		public void Update(Todo todo)
         {
             _ctx.Attach(todo);
             _ctx.Entry(todo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
