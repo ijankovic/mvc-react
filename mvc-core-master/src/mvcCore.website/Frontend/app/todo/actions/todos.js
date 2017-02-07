@@ -40,30 +40,32 @@ export const addTodoServer = (text) => {
   };
 };
 
-const updateTodo = (todo) => {
+export const updateTodo = (id, name, value) => {
   return {
     type: Const.actions.UPDATE_TODO,
-    todo
+    id:id,
+    name: name,
+    value: value
   };
 };
 
-export const toggleTodoServer = (todo) => {
-  const todoJson = {
-    id: todo.id,
-    text: todo.text,
-    isCompleted: !todo.isCompleted
-  };
+// export const updateTodo = (todo) => {
+//   const todoJson = {
+//     id: todo.id,
+//     text: todo.text,
+//     isCompleted: !todo.isCompleted
+//   };
 
-  return dispatch => {
-    //turnOnLoader(dispatch);
-    return fetch(url, createPutRequest(JSON.stringify(todoJson)))
-      .then(getResponseJson)
-      .then(todo => {
-        dispatch(updateTodo(todo));
-        //turnOffLoader(dispatch);
-      });
-  };
-};
+//   return dispatch => {
+//     //turnOnLoader(dispatch);
+//     return fetch(url, createPutRequest(JSON.stringify(todoJson)))
+//       .then(getResponseJson)
+//       .then(todo => {
+//         dispatch(updateTodo(todo));
+//         //turnOffLoader(dispatch);
+//       });
+//   };
+// };
 
 export const toggleTodoSelection = (val, todo) => {
   return {
@@ -98,12 +100,25 @@ export const bulkDeleteServer = () => (dispatch, getState) => {
 
   const {todos} = getState();
   let selectedIds = todos.filter(x => x.isSelected).map(t => { return t.id; });
-
-  return fetch(url, createDeleteRequest(JSON.stringify(selectedIds)))
+  var urlnew = url + '/ids';
+  return fetch(urlnew, createDeleteRequest(JSON.stringify(selectedIds)))
     .then(() => {
       dispatch(removeTodos(selectedIds));
     });
 };
+
+export const saveServer = () => (dispatch, getState) => {
+
+  const {todos} = getState();
+  let updatedItems = todos.filter(x => x.isDirty);
+  var urlnew = url + '/todos';
+  return fetch(urlnew, createPutRequest(JSON.stringify(updatedItems)))
+    .then(todos => {
+      //dispatch(addTodos(todos));
+      console.log(todos);
+    });
+};
+
 
 export const removeTodoServer = (id) => {
   return dispatch => {

@@ -3,29 +3,20 @@ import Todo from './Todo';
 import Immutable from 'immutable';
 import { Table, Checkbox } from 'react-bootstrap';
 import Filter from '../components/Filter';
-import Alert from '../containers/Alert';
 
-const TodoList = ({ todos, selectedCount, total, disableDelete, onTodoComplete, onTodoRemove, onTodoToggle, onToggleAll, onBulkDelete }) => {
+const TodoList = ({ todos, onTodoUpdate, onTodoRemove, onTodoToggle, onToggleAll }) => {
   const items = todos.map(todo => (
         <Todo
             key={todo.id}
             todo={todo}
             toggleSelection={onTodoToggle}
-            onComplete={() => onTodoComplete(todo)}
+            onComplete={() => onTodoUpdate(todo.id, 'isCompleted', !todo.isCompleted)}
             onRemove={() => onTodoRemove(todo.id)}
             />
     ));
   return (
         <div>
-            <Alert title='Bulk delete' onConfirm={onBulkDelete} disabled={disableDelete} btnText='Bulk Delete'>
-                <div>
-                    <h4>Are you sure you want to delete selected records?</h4>
-                </div>
-            </Alert>
-            <span className='pull-right'>
-                <span>Selected {selectedCount} / {total} </span>
-
-            </span>
+            
             <Table striped hover>
                 <thead>
                     <tr>
@@ -54,7 +45,7 @@ const TodoList = ({ todos, selectedCount, total, disableDelete, onTodoComplete, 
 
 TodoList.propTypes = {
   todos: PropTypes.instanceOf(Immutable.List),
-  onTodoComplete: PropTypes.func.isRequired,
+  onTodoUpdate: PropTypes.func.isRequired,
   onTodoRemove: PropTypes.func.isRequired,
   onTodoToggle: PropTypes.func.isRequired
 };

@@ -3,10 +3,11 @@ import Immutable from 'immutable';
 import TodoRecord from '../models/todoRecord';
 
 const todo = (state = Immutable.Record(), action) => {
+  debugger;
   switch (action.type) {
   case Const.actions.ADD_TODO:
   case Const.actions.UPDATE_TODO:
-    return new TodoRecord(action.todo);
+    return state.set(action.name, action.value).set('isDirty', true);
   case Const.actions.TOGGLE_TODO_SELECTION:
     return state.set('isSelected', action.val);
   default:
@@ -15,12 +16,14 @@ const todo = (state = Immutable.Record(), action) => {
 };
 
 export const todos = (state = Immutable.List(), action) => {
+debugger;
   switch (action.type) {
   case Const.actions.ADD_TODO:
     return state.push(todo(undefined, action));
   case Const.actions.ADD_TODOS:
     return state.concat(action.todos.map(t => new TodoRecord(t)));
   case Const.actions.UPDATE_TODO:
+    return state.map((t) => { return (t.id === action.id) ? todo(t, action) : t;});
   case Const.actions.TOGGLE_TODO_SELECTION:
     return state.map((t) => { return (t.id === action.todo.id) ? todo(t, action) : t;});
   case Const.actions.TOGGLE_ALL_SELECTIONS:
@@ -28,7 +31,7 @@ export const todos = (state = Immutable.List(), action) => {
   case Const.actions.REMOVE_TODO:
     return state.filter(t => t.id != action.id);
   case Const.actions.REMOVE_TODOS:
-    return state.filter(t => t.id != action.ids.includes(t.id));
+    return state.filter(t => !action.ids.includes(t.id));
   default: 
     return state;
   }

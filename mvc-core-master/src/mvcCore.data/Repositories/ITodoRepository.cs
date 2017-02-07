@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace mvcCore.data.Repositories
 {
-    public interface ITodoRepository
-    {
-        Todo GetById(int id);
-        IEnumerable<Todo> GetAll();
-				void RemoveRange(int[] ids);
-				void Add(Todo todo);
-        void Remove(int id);
-        void Update(Todo todo);
-        void Save();
-    }
+	public interface ITodoRepository
+	{
+		Todo GetById(int id);
+		IEnumerable<Todo> GetAll();
+		void UpdateRange(IEnumerable<Todo> todos);
+		void RemoveRange(int[] ids);
+		void Add(Todo todo);
+		void Remove(int id);
+		void Update(Todo todo);
+		void Save();
+	}
 }

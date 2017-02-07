@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
-import { toggleTodoServer, removeTodoServer, toggleTodoSelection, toggleAllSelections, bulkDeleteServer } from '../actions/todos';
-import Immutable from 'immutable';
+import { updateTodo, removeTodoServer, toggleTodoSelection, toggleAllSelections } from '../actions/todos';
 import TodoList from '../components/TodoList';
-import TodoList2 from '../components/TodoList2';
 import Const from '../utilities/constants';
 
 
@@ -19,19 +17,15 @@ const getVisibleTodos = (todos, filter) => {
 };
 
 const mapStateToProps = (state) => {
-  let selectedCount = state.todos.filter(x => x.isSelected === true).size;
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter),
-    selectedCount: selectedCount,
-    total: state.todos.count(),
-    disableDelete: selectedCount === 0
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)  
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTodoComplete: (todo) => {
-      dispatch(toggleTodoServer(todo));
+    onTodoUpdate: (id, val, todo) => {
+      dispatch(updateTodo(id, val, todo));
     },
     onTodoRemove: (id) => {
       dispatch(removeTodoServer(id));
@@ -41,9 +35,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     onToggleAll:(val) => {
       dispatch(toggleAllSelections(val));
-    },
-    onBulkDelete: () => {
-      dispatch(bulkDeleteServer());
     }
   };
 };

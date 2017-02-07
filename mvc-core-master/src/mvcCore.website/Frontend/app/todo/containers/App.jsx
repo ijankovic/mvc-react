@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AddTodo from './AddTodo';
 import VisibleTodoList from './VisibleTodoList';
+import HeaderBar from './HeaderBar';
 import Loader from './Loader';
 import { loadAllTodosServer } from '../actions/todos';
 require('../../../style/main');
@@ -18,6 +19,7 @@ class App extends React.Component {
             <div> 
                 <Loader />
                 <AddTodo />
+                <HeaderBar />
                 <VisibleTodoList />       
             </div>
     );    

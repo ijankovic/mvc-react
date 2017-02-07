@@ -115,7 +115,7 @@ class Table extends Component {
     return (
                     <div className="table-responsive">
                         <table className="table table-hover ib-table">
-                            <thead>{header}</thead>
+                            <thead>{header}</thead> 
                             <tbody>{result.rows}</tbody>
                         </table>
                     </div>

@@ -8,57 +8,66 @@ using mvcCore.data.Entities;
 using System.Xml.Linq;
 using System.Threading;
 using mvcCore.data.Repositories;
+using System.Collections;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace mvcCore.website.Controllers
 {
-    [Route("api/[controller]")]
-    public class TodoController : Controller
-    {
-        private readonly ITodoRepository _todoRepo;
-        
-        public TodoController(ITodoRepository todoRepo)
-        {
-            _todoRepo = todoRepo;
-        }
+	[Route("api/[controller]")]
+	public class TodoController : Controller
+	{
+		private readonly ITodoRepository _todoRepo;
 
-        [HttpGet]
-        public IActionResult GetTodos()
-        {
-            var todos = _todoRepo.GetAll();
-            _todoRepo.Save();
-            return new ObjectResult(todos);
-        }
+		public TodoController(ITodoRepository todoRepo)
+		{
+			_todoRepo = todoRepo;
+		}
 
-        [HttpPost]
-        public IActionResult CreateTodo([FromBody] Todo todo)
-        {
-            _todoRepo.Add(todo);
-            _todoRepo.Save();
-            return new ObjectResult(todo);
-        }
+		[HttpGet]
+		public IActionResult GetTodos()
+		{
+			var todos = _todoRepo.GetAll();
+			_todoRepo.Save();
+			return new ObjectResult(todos);
+		}
 
-        [HttpPut]
-        public IActionResult UpdateTodo([FromBody] Todo todo)
-        {
-            _todoRepo.Update(todo);
-            _todoRepo.Save();
-            return new ObjectResult(todo);
-        }
+		[HttpPost]
+		public IActionResult CreateTodo([FromBody] Todo todo)
+		{
+			_todoRepo.Add(todo);
+			_todoRepo.Save();
+			return new ObjectResult(todo);
+		}
 
-        [HttpDelete]
-        public void DeleteTodo([FromBody] int id)
-        {
-            _todoRepo.Remove(id);
-            _todoRepo.Save();
-        }
+		[HttpPut]
+		public IActionResult UpdateTodo([FromBody] Todo todo)
+		{
+			_todoRepo.Update(todo);
+			_todoRepo.Save();
+			return new ObjectResult(todo);
+		}
 
-				[HttpDelete]
-				public void DeleteTodos([FromBody] int[] ids)
-				{
-					_todoRepo.RemoveRange(ids);
-					_todoRepo.Save();
-				}
+		[HttpPut("{todos}")]
+		public IActionResult UpdateTodos([FromBody] IEnumerable<Todo> todos)
+		{
+			_todoRepo.UpdateRange(todos);
+			_todoRepo.Save();
+			return new ObjectResult(todos);
+		}
+
+		[HttpDelete]
+		public void DeleteTodo([FromBody] int id)
+		{
+			_todoRepo.Remove(id);
+			_todoRepo.Save();
+		}
+
+		[HttpDelete("{ids}")]
+		public void DeleteTodos([FromBody] int[] ids)
+		{
+			_todoRepo.RemoveRange(ids);
+			_todoRepo.Save();
+		}
 	}
 }

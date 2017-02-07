@@ -5,5 +5,6 @@ export default new Record({
   text: '',
   isCompleted: false,
   isSelected: false,
+  isDirty: false,
   customProperty:'n/A'
 });
