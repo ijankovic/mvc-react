@@ -36,6 +36,7 @@ namespace mvcCore.website
         {
             services.AddMvc();
             services.AddTransient<ITodoRepository, TodoRepository>();
+						services.AddTransient<IUserRepository, UserRepository>();
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 

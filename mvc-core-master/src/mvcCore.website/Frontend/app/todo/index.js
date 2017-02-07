@@ -8,15 +8,17 @@ import { combineReducers } from 'redux-immutable';
 import App from './containers/App';
 import { isLoading } from './reducers/isLoading';
 import { todos } from './reducers/todos';
+import { users } from './reducers/users';
+import { pager } from './reducers/pager';
 import { visibilityFilter } from './reducers/visibilityFilter';
-import { visibility } from './utilities/constants';
 import AppStateRecord from './models/appStateRecord';
-import { loadAllTodosServer } from './actions/todos'
 
 const todoApp = combineReducers({ 
-    todos,
-    visibilityFilter,
-    isLoading
+  todos,
+  users,
+  visibilityFilter,
+  isLoading,
+  pager
 });
 
 const initialState = new AppStateRecord();
@@ -28,4 +30,4 @@ render (
         <App/>
     </Provider>,
     document.getElementById('root')
-)
+);

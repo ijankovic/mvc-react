@@ -3,7 +3,6 @@ import Immutable from 'immutable';
 import TodoRecord from '../models/todoRecord';
 
 const todo = (state = Immutable.Record(), action) => {
-  debugger;
   switch (action.type) {
   case Const.actions.ADD_TODO:
   case Const.actions.UPDATE_TODO:
@@ -16,7 +15,6 @@ const todo = (state = Immutable.Record(), action) => {
 };
 
 export const todos = (state = Immutable.List(), action) => {
-debugger;
   switch (action.type) {
   case Const.actions.ADD_TODO:
     return state.push(todo(undefined, action));

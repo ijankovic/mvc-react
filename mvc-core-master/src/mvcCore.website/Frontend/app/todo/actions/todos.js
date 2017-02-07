@@ -138,6 +138,13 @@ const addTodos = (todos) => {
   };
 };
 
+const addUsers = (users) => {
+  return{
+    type: Const.actions.ADD_USERS,
+    users
+  };
+};
+
 
 
 export const loadAllTodosServer = () => {
@@ -145,8 +152,9 @@ export const loadAllTodosServer = () => {
     turnOnLoader(dispatch);
     return fetch(url, createGetRequest())
       .then(getResponseJson)
-      .then(todos => {
-        dispatch(addTodos(todos));
+      .then(data => {
+        dispatch(addTodos(data.todos));
+        dispatch(addUsers(data.users));
         turnOffLoader(dispatch);
       });
   };

@@ -18,18 +18,20 @@ namespace mvcCore.website.Controllers
 	public class TodoController : Controller
 	{
 		private readonly ITodoRepository _todoRepo;
+		private readonly IUserRepository _userRepository;
 
-		public TodoController(ITodoRepository todoRepo)
+		public TodoController(ITodoRepository todoRepository, IUserRepository userRepository)
 		{
-			_todoRepo = todoRepo;
+			_todoRepo = todoRepository;
+			_userRepository = userRepository;
 		}
 
 		[HttpGet]
 		public IActionResult GetTodos()
 		{
 			var todos = _todoRepo.GetAll();
-			_todoRepo.Save();
-			return new ObjectResult(todos);
+			var users = _userRepository.GetUsersAll();
+			return new ObjectResult(new { todos = todos, users = users });
 		}
 
 		[HttpPost]

@@ -7,8 +7,8 @@ export const Dropdown = ({ value, onChange, options, name, label, disabled }) =>
       <select onChange={e => onChange(name, e.target.value)} disabled={disabled} className='form-control' value={value}>
           {
             options && options.map(option =>
-                <option value={option.Value} key={option.Value}>
-                  {option.Text}
+                <option value={option.id} key={option.id}>
+                  {option.name}
                 </option>)
           }
       </select>
@@ -18,8 +18,8 @@ export const Dropdown = ({ value, onChange, options, name, label, disabled }) =>
 Dropdown.propTypes = {
   options: PropTypes.arrayOf(
       PropTypes.shape({
-        Value: PropTypes.any.isRequired,
-        Text: PropTypes.string.isRequired
+        id: PropTypes.any.isRequired,
+        name: PropTypes.string.isRequired
       })
     ).isRequired,
   name: PropTypes.string.isRequired,

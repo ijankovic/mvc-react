@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Alert from '../containers/Alert';
 
-const TodoActionBar = ({disableDelete, disableSave, selectedCount, total, onBulkDelete, onSave }) => {
+const ActionBar = ({disableDelete, disableSave, selectedCount, modifiedCount, total, onBulkDelete, onSave }) => {
   return (
         <div>
             <Alert title='Bulk delete' onConfirm={onBulkDelete} disabled={disableDelete} btnText='Bulk Delete'>
@@ -16,18 +16,22 @@ const TodoActionBar = ({disableDelete, disableSave, selectedCount, total, onBulk
             </Alert>
             <span className='pull-right'>
                 <span>Selected {selectedCount} / {total} </span>
-            </span>            
+            </span>      
+            <span className='pull-right'>
+                <span>Modified {modifiedCount} / {total} </span>
+            </span>       
         </div>
     );
 };
 
-TodoActionBar.propTypes = {
+ActionBar.propTypes = {
   disableDelete: PropTypes.bool.isRequired,
   disableSave: PropTypes.bool.isRequired,
   selectedCount:PropTypes.number.isRequired,
+  modifiedCount: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
   onBulkDelete: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired
 };
 
-export default TodoActionBar;
+export default ActionBar;
