@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateTodo, removeTodoServer, toggleTodoSelection, toggleAllSelections, loadAllTodosServer } from '../actions/todos';
+import { updateTodo, removeTodoServer, toggleTodoSelection, toggleAllSelections, loadTodos } from '../actions/todos';
 import TodoList from '../components/TodoList';
 import Const from '../utilities/constants';
 
@@ -17,9 +17,11 @@ const getVisibleTodos = (todos, filter) => {
 };
 
 const mapStateToProps = (state) => {
-  const {page, pageSize, users, todos, visibilityFilter} = state;
+  const {pager, filter, todos, visibilityFilter} = state;
+  const { page, pageSize, total } = pager;
+  const {users} = filter;
   let visibleTodos = getVisibleTodos(todos, visibilityFilter);
-  let hasMore = (visibleTodos.size > ((page + 1 ) * pageSize));
+  let hasMore = (total > (page * pageSize));
 
   return {
     visibleTodos,
@@ -44,8 +46,8 @@ const mapDispatchToProps = (dispatch) => {
     onToggleAll:(val) => {
       dispatch(toggleAllSelections(val));
     },
-    loadMore: () => {
-      dispatch(loadAllTodosServer());
+    loadMore: (page) => {
+      dispatch(loadTodos(Const.pager.PAGE_SIZE, page));
     }
   };
 };

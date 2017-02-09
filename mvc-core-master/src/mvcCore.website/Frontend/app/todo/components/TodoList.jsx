@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import Todo from './Todo';
 import Immutable from 'immutable';
 import { Table, Checkbox } from 'react-bootstrap';
-import Filter from '../components/Filter';
+import TodoListFilter from '../components/TodoListFilter';
 import NameIdRecord from '../../controls/models/NameIdRecord';
 import InfiniteScroll from '../../controls/InfiniteScroll';
 
 
 const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, onTodoRemove, onTodoToggle, onToggleAll }) => {
-  const items = visibleTodos.map(todo => (
+    const items = visibleTodos.map(todo => (
         <Todo
             key={todo.id}
             todo={todo}
@@ -19,24 +19,27 @@ const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, 
             onRemove={() => onTodoRemove(todo.id)}
             />
     ));
-  return (
-        <div>
-            <Filter />
-            <InfiniteScroll pageStart={page} hasMore={hasMore} loadMore={loadMore}>
-                <Table striped hover>
-                    <thead>
-                        <tr>
-                            <th className='col-md-1'><Checkbox onChange={(e) => onToggleAll(e.target.checked)} /></th>
-                            <th className='col-md-1'>Id</th>
-                            <th className='col-md-1'>Done</th>
-                            <th className='col-md-8'>Text</th>
-                            <th className='col-md-8'>Assigned</th>
-                            <th className='col-md-2'></th>
-                        </tr>
-                    </thead>
-                    <tbody>{items}</tbody>
-                </Table>
-            </InfiniteScroll>
+    return (
+        <div className='area-container'>
+            <h5 className='uppercase'>Tasks</h5>
+            <div className='filter-container'>
+                <TodoListFilter />
+                <InfiniteScroll pageStart={page} hasMore={hasMore} loadMore={loadMore}>
+                    <Table striped hover>
+                        <thead>
+                            <tr>
+                                <th className='col-md-1'><Checkbox onChange={(e) => onToggleAll(e.target.checked)} /></th>
+                                <th className='col-md-1'>Id</th>
+                                <th className='col-md-1'>Done</th>
+                                <th className='col-md-8'>Text</th>
+                                <th className='col-md-8'>Assigned</th>
+                                <th className='col-md-2'></th>
+                            </tr>
+                        </thead>
+                        <tbody>{items}</tbody>
+                    </Table>
+                </InfiniteScroll>
+            </div>
         </div>
     );
 };
@@ -45,11 +48,11 @@ const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, 
 
 
 TodoList.propTypes = {
-  visibleTodos: PropTypes.instanceOf(Immutable.List),
-  users: PropTypes.arrayOf(PropTypes.instanceOf(NameIdRecord)),
-  onTodoUpdate: PropTypes.func.isRequired,
-  onTodoRemove: PropTypes.func.isRequired,
-  onTodoToggle: PropTypes.func.isRequired
+    visibleTodos: PropTypes.instanceOf(Immutable.List),
+    users: PropTypes.arrayOf(PropTypes.instanceOf(NameIdRecord)),
+    onTodoUpdate: PropTypes.func.isRequired,
+    onTodoRemove: PropTypes.func.isRequired,
+    onTodoToggle: PropTypes.func.isRequired
 };
 
 

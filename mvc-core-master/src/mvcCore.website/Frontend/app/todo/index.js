@@ -1,33 +1,17 @@
-import Immutable from 'immutable';
+
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider, action } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
-import { combineReducers } from 'redux-immutable';
-import App from './containers/App';
-import { isLoading } from './reducers/isLoading';
-import { todos } from './reducers/todos';
-import { users } from './reducers/users';
-import { pager } from './reducers/pager';
-import { visibilityFilter } from './reducers/visibilityFilter';
-import AppStateRecord from './models/appStateRecord';
+import { Provider } from 'react-redux';
+import App2 from './containers/App2';
+import configureStore from './configureStore';
+import { fetchInitialData } from './actions/todos';
 
-const todoApp = combineReducers({ 
-  todos,
-  users,
-  visibilityFilter,
-  isLoading,
-  pager
-});
-
-const initialState = new AppStateRecord();
-
-let store = createStore(todoApp, initialState, applyMiddleware(thunk));
+let store = configureStore();
+store.dispatch(fetchInitialData());
 
 render (
     <Provider store={store}>
-        <App/>
+        <App2/>
     </Provider>,
     document.getElementById('root')
 );

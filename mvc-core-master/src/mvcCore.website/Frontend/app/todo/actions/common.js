@@ -13,3 +13,17 @@ export const setLoadingState = (isLoading) => {
     isLoading
   };
 };
+
+export const setPagerPage = (page) => {
+  return{
+    type: Const.actions.UPDATE_PAGE,
+    page
+  };
+};
+
+export const setPagerTotal = (total) => {
+  return{
+    type: Const.actions.UPDATE_TOTAL,
+    total
+  };
+};

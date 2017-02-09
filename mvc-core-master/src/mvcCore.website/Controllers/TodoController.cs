@@ -26,12 +26,20 @@ namespace mvcCore.website.Controllers
 			_userRepository = userRepository;
 		}
 
-		[HttpGet]
-		public IActionResult GetTodos()
+		[HttpGet()]
+		public IActionResult Get()
 		{
-			var todos = _todoRepo.GetAll();
 			var users = _userRepository.GetUsersAll();
-			return new ObjectResult(new { todos = todos, users = users });
+			return new ObjectResult(users);
+		}
+
+		[HttpGet("{pageSize}/{page}")]
+		public IActionResult GetTodos(int pageSize, int page = 1)
+		{
+			var query = _todoRepo.GetAll();
+			var total = query.Count();
+			var todos = query.Skip((page - 1) * pageSize).Take(pageSize);
+			return new ObjectResult(new {total = total, todos = todos });
 		}
 
 		[HttpPost]

@@ -26,18 +26,25 @@ class AddTodo extends React.Component {
     
   render() {     
     return (
-            <FormGroup>
-                <InputGroup>
-                    <InputGroup.Addon>Add todo item:</InputGroup.Addon>
-                    <FormControl 
-                        value={this.state.value}
-                        type='text' 
-                        onChange={this.handleChange}/>
-                    <InputGroup.Button>
-                        <Button onClick={this.submit}>Submit</Button>
-                    </InputGroup.Button>
-                </InputGroup>
-            </FormGroup>
+            <div className='area-container'>
+              <h5 className='uppercase'>Create tasks</h5>
+                <div className='filter-container'>
+                  <FormGroup>
+                      <InputGroup>
+                          <InputGroup.Addon>Add todo item:</InputGroup.Addon>
+                          <FormControl 
+                              value={this.state.value}
+                              type='text' 
+                              placeholder='enter task name'
+                              onChange={this.handleChange}/>
+                          <InputGroup.Button>
+                              <Button onClick={this.submit}>Submit</Button>
+                          </InputGroup.Button>
+                      </InputGroup>
+                  </FormGroup>               
+                </div>
+            </div>
+
     );
   }
 }

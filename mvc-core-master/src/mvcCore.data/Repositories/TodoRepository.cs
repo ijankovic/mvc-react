@@ -21,10 +21,9 @@ namespace mvcCore.data.Repositories
 			_ctx.Todos.Add(todo);
 		}
 
-		public IEnumerable<Todo> GetAll()
+		public IQueryable<Todo> GetAll()
 		{
-			var todos = _ctx.Todos.ToList();
-			return todos;
+			return _ctx.Todos;
 		}
 
 		public Todo GetById(int id)

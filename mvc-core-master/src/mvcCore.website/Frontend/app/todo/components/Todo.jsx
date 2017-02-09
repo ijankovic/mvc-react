@@ -11,14 +11,13 @@ const Todo = ({todo, users, onComplete, onRemove, onUpdate }) => {
    
   const completeText = !todo.isCompleted ? 'Complete' : 'Reopen';
   const checkMark = todo.isCompleted ? <Glyphicon className='text-success' glyph='ok'/> : null;
-  
   return (
         <tr key={'todo-' + todo.id}>
             <td><Checkbox checked={todo.isSelected} onChange={(e) => {onUpdate(todo.id, 'isSelected',e.target.checked);}} /></td>
             <td>{todo.id}</td>
             <td>{checkMark}</td>
             <td><TextBox value={todo.text} onUpdate={(e) => {onUpdate(todo.id, 'text', e.target.value);}} /></td>
-            <td><Dropdown name='userId' options={users} value={todo.userId} onChange={(name, val) => {onUpdate(todo.id, name, val);}} /></td>
+            <td><Dropdown defaultText='N/A' parentKey={'todo_'+ todo.id} name='userId' options={users} value={todo.userId} onChange={(name, val) => {onUpdate(todo.id, name, val);}} /></td>
             <td>
                 <Link onClick={onComplete}>{completeText}</Link>
                 <Link onClick={onRemove}>Remove</Link>

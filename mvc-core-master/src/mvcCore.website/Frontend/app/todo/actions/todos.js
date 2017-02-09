@@ -1,6 +1,6 @@
 import Const from '../utilities/constants';
 import fetch from 'isomorphic-fetch';
-import { setLoadingState } from './common';
+import { setLoadingState, setPagerPage, setPagerTotal } from './common';
 
 const url = '/api/Todo';
 
@@ -28,17 +28,7 @@ const addTodo = (todo) => {
   };
 };
 
-export const addTodoServer = (text) => {
-  return dispatch => {
-    //turnOnLoader(dispatch);
-    return fetch(url, createPostRequest(JSON.stringify({ Text: text })))
-      .then(getResponseJson)
-      .then(todo => {
-        dispatch(addTodo(todo));
-        //turnOffLoader(dispatch);
-      });
-  };
-};
+
 
 export const updateTodo = (id, name, value) => {
   return {
@@ -49,23 +39,13 @@ export const updateTodo = (id, name, value) => {
   };
 };
 
-// export const updateTodo = (todo) => {
-//   const todoJson = {
-//     id: todo.id,
-//     text: todo.text,
-//     isCompleted: !todo.isCompleted
-//   };
-
-//   return dispatch => {
-//     //turnOnLoader(dispatch);
-//     return fetch(url, createPutRequest(JSON.stringify(todoJson)))
-//       .then(getResponseJson)
-//       .then(todo => {
-//         dispatch(updateTodo(todo));
-//         //turnOffLoader(dispatch);
-//       });
-//   };
-// };
+export const updateFilter = (name, value)=>{
+  return {
+    type: Const.actions.UPDATE_FILTER,
+    name: name,
+    value: value
+  };
+};
 
 export const toggleTodoSelection = (val, todo) => {
   return {
@@ -96,6 +76,16 @@ const removeTodos = (ids) => {
   };
 };
 
+export const addTodoServer = (text) => {
+  return dispatch => {
+    return fetch(url, createPostRequest(JSON.stringify({ Text: text })))
+      .then(getResponseJson)
+      .then(todo => {
+        dispatch(addTodo(todo));
+      });
+  };
+};
+
 export const bulkDeleteServer = () => (dispatch, getState) => {
 
   const {todos} = getState();
@@ -114,7 +104,6 @@ export const saveServer = () => (dispatch, getState) => {
   var urlnew = url + '/todos';
   return fetch(urlnew, createPutRequest(JSON.stringify(updatedItems)))
     .then(todos => {
-      //dispatch(addTodos(todos));
       console.log(todos);
     });
 };
@@ -122,11 +111,36 @@ export const saveServer = () => (dispatch, getState) => {
 
 export const removeTodoServer = (id) => {
   return dispatch => {
-    //turnOnLoader(dispatch);
     return fetch(url, createDeleteRequest(id.toString()))
       .then(() => {
         dispatch(removeTodo(id));
-        //turnOffLoader(dispatch);
+      });
+  };
+};
+
+export const loadTodos = (pageSize, page) => {
+  var urlNew =  url +'/'+pageSize + '/' + page;
+  
+  
+  return dispatch => {
+    dispatch(setPagerPage(page));
+    return fetch(urlNew, createGetRequest())
+      .then(getResponseJson)
+      .then(data => 
+      {
+        dispatch(setPagerTotal(data.total));
+        dispatch(addTodos(data.todos));
+      });
+  };
+};
+
+export const fetchInitialData = () => {
+  return dispatch => {
+    return fetch(url, createGetRequest())
+      .then(getResponseJson)
+      .then(data => 
+      {
+        dispatch(addUsers(data));
       });
   };
 };
@@ -140,22 +154,13 @@ const addTodos = (todos) => {
 
 const addUsers = (users) => {
   return{
-    type: Const.actions.ADD_USERS,
-    users
+    type: Const.actions.UPDATE_FILTER,
+    name:'users',
+    value: users
   };
 };
 
 
 
-export const loadAllTodosServer = () => {
-  return dispatch => {
-    turnOnLoader(dispatch);
-    return fetch(url, createGetRequest())
-      .then(getResponseJson)
-      .then(data => {
-        dispatch(addTodos(data.todos));
-        dispatch(addUsers(data.users));
-        turnOffLoader(dispatch);
-      });
-  };
-};
+
+
