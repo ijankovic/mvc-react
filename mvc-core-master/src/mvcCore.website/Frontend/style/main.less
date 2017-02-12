@@ -4,12 +4,45 @@ body {
     background: @backgroundColor; 
     padding: 10px 20px;
 }
+.checkbox label, .radio label{
+    min-height: 10px;
+}
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline: none;
+}
+.table-header{
+    background-color: @blue;
+    color: @white;
+}
 .uppercase {
     text-transform: uppercase;
+}
+.page-container{
+    max-width: 1200;
+    margin: 0 auto;
+}
+.navbar-container{
+    margin-bottom: 10px;
 }
 .area-container{
     padding: 0 5px;
 }
 .filter-container{
     padding: 10 0px;
+}
+.action-filter-container{
+    padding: 15 0px;
+}
+.box2 {
+  display: flex;
+  margin: 1em;
+}
+.box2 > div
+{
+    display: inline-flex;
+    margin-left: 5px;
+}
+.box2 > span{
+    padding: 10px; 
 }

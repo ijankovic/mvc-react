@@ -40,8 +40,8 @@ const mapDispatchToProps = (dispatch) => {
     onTodoRemove: (id) => {
       dispatch(removeTodoServer(id));
     },
-    onTodoToggle: (val, todo) => {
-      dispatch(toggleTodoSelection(val, todo));
+    onTodoSelect: (id, isSelected) => {
+      dispatch(toggleTodoSelection(id, isSelected));
     },
     onToggleAll:(val) => {
       dispatch(toggleAllSelections(val));

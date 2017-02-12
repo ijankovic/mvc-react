@@ -2,7 +2,7 @@
 import React, {PropTypes} from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const Modal2 = ({title, isOpen, onClose, onConfirm, children, confirmText='Ok', cancelText='Cancel', dialogClassName = 'custom-modal'}) => {
+const CustomModal = ({title, isOpen, onClose, onConfirm, children, confirmText='Ok', cancelText='Cancel', dialogClassName = 'custom-modal'}) => {
   return (
         <Modal
             show={isOpen}
@@ -25,7 +25,7 @@ const Modal2 = ({title, isOpen, onClose, onConfirm, children, confirmText='Ok', 
   );
 };
 
-Modal2.propTypes = {
+CustomModal.propTypes = {
   title: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
@@ -33,4 +33,4 @@ Modal2.propTypes = {
   onConfirm: PropTypes.func.isRequired
 };
 
-export default Modal2;
+export default CustomModal;

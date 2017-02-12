@@ -47,11 +47,11 @@ export const updateFilter = (name, value)=>{
   };
 };
 
-export const toggleTodoSelection = (val, todo) => {
+export const toggleTodoSelection = (id, value) => {
   return {
     type: Const.actions.TOGGLE_TODO_SELECTION,
-    val,
-    todo
+    id,
+    value
   };
 };
 

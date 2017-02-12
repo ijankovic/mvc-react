@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 
 const Link = ({ active, disabled = false, children, onClick }) => {
   return (
-        <Button  
+        <a  
             className='btn btn-link'
             active={active}
             disabled={disabled}                  
@@ -12,7 +12,7 @@ const Link = ({ active, disabled = false, children, onClick }) => {
               onClick();
             }} >
             {children}
-        </Button>
+        </a>
   );
 };
 

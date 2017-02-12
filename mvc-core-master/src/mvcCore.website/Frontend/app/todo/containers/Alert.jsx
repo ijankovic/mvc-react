@@ -1,6 +1,7 @@
 import React from 'react';
-import Modal2 from '../../controls/Modal2';
+import CustomModal from '../../controls/CustomModal';
 import Link from '../components/Link';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class Alert extends React.Component {
   constructor(props) {
@@ -24,8 +25,8 @@ class Alert extends React.Component {
   render() {     
     return (
         <div>
-            <Modal2 title={this.props.title} children={this.props.children} isOpen={this.state.isOpen} onClose={this._close} onConfirm={() => {this._close();  this.props.onConfirm(); }} />
-            <Link disabled={this.props.disabled} onClick={this._open}>{this.props.btnText}</Link>
+            <CustomModal title={this.props.title} children={this.props.children} isOpen={this.state.isOpen} onClose={this._close} onConfirm={() => {this._close();  this.props.onConfirm(); }} />
+            <Button bsStyle={this.props.style} disabled={this.props.disabled} onClick={this._open}><Glyphicon glyph={this.props.glyph} /> {this.props.btnText}</Button>
         </div>
     );
   }

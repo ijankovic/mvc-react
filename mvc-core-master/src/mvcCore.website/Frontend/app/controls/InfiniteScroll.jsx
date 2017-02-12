@@ -43,7 +43,7 @@ export default class InfiniteScroll extends Component {
     }
   }
   _getDefaultLoader(){
-    return (<div className='ng-loader'><div className='text-center'><i className='fa fa-spin fa-spinner fa-3x'></i></div></div>);
+    return (<div className='spinner-container'><div className='spinner'></div> </div> );
   }
   render() {
     this._attachScrollListener();

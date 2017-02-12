@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import App2 from './containers/App2';
+import App from './containers/App';
 import configureStore from './configureStore';
 import { fetchInitialData } from './actions/todos';
 
@@ -11,7 +11,7 @@ store.dispatch(fetchInitialData());
 
 render (
     <Provider store={store}>
-        <App2/>
+        <App/>
     </Provider>,
     document.getElementById('root')
 );
