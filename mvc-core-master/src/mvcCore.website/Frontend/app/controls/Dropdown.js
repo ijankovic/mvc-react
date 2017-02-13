@@ -1,4 +1,5 @@
 ﻿import React, { PropTypes } from 'react';
+import Immutable from 'immutable';
 
 export const Dropdown = ({ value, onChange, options, name, label, disabled, parentKey, defaultText }) => (
 
@@ -14,18 +15,12 @@ export const Dropdown = ({ value, onChange, options, name, label, disabled, pare
 );
 
 Dropdown.propTypes = {
-  options: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.any.isRequired,
-        name: PropTypes.string.isRequired
-      })
-    ).isRequired,
+  options: PropTypes.instanceOf(Immutable.List),
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
 Dropdown.defaultProps = {
-  options: [],
   defaultText:PropTypes.string,
   disabled: false
 };

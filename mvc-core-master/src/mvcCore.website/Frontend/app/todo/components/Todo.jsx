@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Immutable from 'immutable';
 import TodoRecord from '../models/todoRecord';
 import Link from './Link';
 import { Checkbox } from 'react-bootstrap';
@@ -8,7 +9,7 @@ import {Dropdown } from '../../controls/Dropdown';
 import {NameIdRecord } from '../../controls/models/NameIdRecord';
 
 const Todo = ({todo, users, onComplete, onRemove, onUpdate, onSelected }) => {
-   
+   debugger
   const completeText = !todo.isCompleted ? 'Complete' : 'Reopen';
   const checkMark = todo.isCompleted ? <Glyphicon className='text-success' glyph='ok'/> : null;
   return (
@@ -29,7 +30,7 @@ Todo.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   onSelected: PropTypes.func.isRequired,
   todo:  PropTypes.instanceOf(TodoRecord),
-  users: PropTypes.arrayOf(PropTypes.instanceOf(NameIdRecord))
+  users: PropTypes.instanceOf(Immutable.List)
 };
 
 export default Todo;

@@ -9,13 +9,12 @@ import InfiniteScroll from '../../controls/InfiniteScroll';
 import HeaderActionBar from '../containers/HeaderActionBar';
 
 
-const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, onTodoRemove, onTodoToggle, onTodoSelect, onToggleAll }) => {
+const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, onTodoRemove, onTodoSelect, onToggleAll }) => {
   const items = visibleTodos.map(todo => (
         <Todo
             key={todo.id}
             todo={todo}
             users={users}
-            toggleSelection={onTodoToggle}
             onUpdate={onTodoUpdate}
             onSelected={onTodoSelect}
             onComplete={() => onTodoUpdate(todo.id, 'isCompleted', !todo.isCompleted)}
@@ -62,10 +61,9 @@ const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, 
 
 TodoList.propTypes = {
   visibleTodos: PropTypes.instanceOf(Immutable.List),
-  users: PropTypes.arrayOf(PropTypes.instanceOf(NameIdRecord)),
+  users: PropTypes.instanceOf(Immutable.List),
   onTodoUpdate: PropTypes.func.isRequired,
-  onTodoRemove: PropTypes.func.isRequired,
-  onTodoToggle: PropTypes.func.isRequired
+  onTodoRemove: PropTypes.func.isRequired
 };
 
 

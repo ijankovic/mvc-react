@@ -126,8 +126,8 @@ export const removeTodoServer = (id) => {
 };
 
 export const loadTodos = (pageSize, page) => (dispatch, getState) => {
-  debugger;
   const {filter} = getState();
+  //var userId = filter.userId > 0 ? filter.userId : null;
   var urlNew =  url +'/'+ filter.userId +'/'+pageSize + '/' + page;
   
   dispatch(setPagerPage(page));
@@ -167,9 +167,8 @@ const attachTodos = (todos) => {
 
 const addUsers = (users) => {
   return{
-    type: Const.actions.UPDATE_FILTER,
-    name:'users',
-    value: users
+    type: Const.actions.ADD_USERS,
+    users: users
   };
 };
 

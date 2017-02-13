@@ -19,7 +19,7 @@ const getVisibleTodos = (todos, filter) => {
 const mapStateToProps = (state) => {
   const {pager, isAlertVisible, filter, todos, visibilityFilter} = state;
   const { page, pageSize, total } = pager;
-  const {users, userId} = filter;
+  const {users} = filter;
   let visibleTodos = getVisibleTodos(todos, visibilityFilter);
   let hasMore = (total > (page * pageSize));
 

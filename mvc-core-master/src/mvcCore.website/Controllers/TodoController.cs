@@ -40,7 +40,7 @@ namespace mvcCore.website.Controllers
 			var result = _todoRepo.GetByUserId(userId, rangeFrom, pageSize);
 			//var total = query.Count();
 			//var todos = query.Skip().Take(pageSize);
-			return new ObjectResult(new {total = result.Item1, todos = result.Item2 });
+			return new ObjectResult(new { total = result.Item1, todos = result.Item2 });
 		}
 
 		[HttpPost]
@@ -51,17 +51,18 @@ namespace mvcCore.website.Controllers
 			return new ObjectResult(todo);
 		}
 
-		[HttpPut]
-		public IActionResult UpdateTodo([FromBody] Todo todo)
-		{
-			_todoRepo.Update(todo);
-			_todoRepo.Save();
-			return new ObjectResult(todo);
-		}
 
 		[HttpPut("{todos}")]
 		public IActionResult UpdateTodos([FromBody] IEnumerable<Todo> todos)
 		{
+			//var updatedRecords = todos.Select(x => new Todo
+			//{
+			//	Id = x.Id,
+			//	IsCompleted = x.IsCompleted,
+			//	Text = x.Text,
+			//	UserId = x.UserId == -1 ? null : x.UserId
+
+			//});
 			_todoRepo.UpdateRange(todos);
 			_todoRepo.Save();
 			return new ObjectResult(todos);
