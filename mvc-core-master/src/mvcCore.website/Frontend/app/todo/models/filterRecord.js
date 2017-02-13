@@ -3,5 +3,5 @@ import Const from '../utilities/constants';
 
 export default new Record({
   users: List(),
-  userId: 0
+  userId: null
 });

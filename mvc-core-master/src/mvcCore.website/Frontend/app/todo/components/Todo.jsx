@@ -14,12 +14,11 @@ const Todo = ({todo, users, onComplete, onRemove, onUpdate, onSelected }) => {
   return (
         <tr key={'todo-' + todo.id}>
             <td><Checkbox checked={todo.isSelected} onChange={(e) => {onSelected(todo.id,e.target.checked);}} /></td>
-            <td>{todo.id}</td>
-            <td>{checkMark}</td>
-            <td><TextBox value={todo.text} onUpdate={(e) => {onUpdate(todo.id, 'text', e.target.value);}} /></td>
-            <td><Dropdown defaultText='N/A' parentKey={'todo_'+ todo.id} name='userId' options={users} value={todo.userId} onChange={(name, val) => {onUpdate(todo.id, name, val);}} /></td>
-            <td><Link onClick={onComplete}>{completeText}</Link></td>  
-            <td><Link onClick={onRemove}>Remove</Link></td>          
+            <td className='col-xs-1'>{todo.id}</td>
+            <td className='col-xs-1'>{checkMark}</td>
+            <td className='col-xs-4'><TextBox value={todo.text} onUpdate={(e) => {onUpdate(todo.id, 'text', e.target.value);}} /></td>
+            <td className='col-xs-2'><Dropdown defaultText='N/A' parentKey={'todo_'+ todo.id} name='userId' options={users} value={todo.userId} onChange={(name, val) => {onUpdate(todo.id, name, val);}} /></td>
+            <td className='text-right'><Link onClick={onComplete}>{completeText}</Link> <Link onClick={onRemove}>Remove</Link></td>  
         </tr>
   );
 };

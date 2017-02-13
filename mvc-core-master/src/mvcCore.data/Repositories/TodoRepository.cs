@@ -59,5 +59,13 @@ namespace mvcCore.data.Repositories
 		{
 			_ctx.SaveChanges();
 		}
+
+		public Tuple<int, IEnumerable<Todo>> GetByUserId(int? userId, int rangeFrom, int pageSize)
+		{
+			var query = _ctx.Todos.Where(x => !userId.HasValue || (x.UserId.HasValue && x.UserId == userId));
+			var total = query.Count();
+			var result = query.Skip(rangeFrom).Take(pageSize).ToList();
+			return new Tuple<int, IEnumerable<Todo>>(total, result);
+		}
 	}
 }

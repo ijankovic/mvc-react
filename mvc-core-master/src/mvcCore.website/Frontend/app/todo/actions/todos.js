@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { setLoadingState, setPagerPage, setPagerTotal } from './common';
 
 const url = '/api/Todo';
+const getTodosUrl = '/api/Todo/pageSize/page/userId';
 
 const turnOffLoader = (dispatch) => dispatch(setLoadingState(false));
 const turnOnLoader = (dispatch) => dispatch(setLoadingState(true));
@@ -76,6 +77,12 @@ const removeTodos = (ids) => {
   };
 };
 
+const clearDirtyFlag = () =>{
+  return{
+    type: Const.actions.CLEAR_DIRTY_FLAG,
+  };
+};
+
 export const addTodoServer = (text) => {
   return dispatch => {
     return fetch(url, createPostRequest(JSON.stringify({ Text: text })))
@@ -103,8 +110,8 @@ export const saveServer = () => (dispatch, getState) => {
   let updatedItems = todos.filter(x => x.isDirty);
   var urlnew = url + '/todos';
   return fetch(urlnew, createPutRequest(JSON.stringify(updatedItems)))
-    .then(todos => {
-      console.log(todos);
+    .then(() => {
+      dispatch(clearDirtyFlag());
     });
 };
 
@@ -118,20 +125,19 @@ export const removeTodoServer = (id) => {
   };
 };
 
-export const loadTodos = (pageSize, page) => {
-  var urlNew =  url +'/'+pageSize + '/' + page;
+export const loadTodos = (pageSize, page) => (dispatch, getState) => {
+  debugger;
+  const {filter} = getState();
+  var urlNew =  url +'/'+ filter.userId +'/'+pageSize + '/' + page;
   
-  
-  return dispatch => {
-    dispatch(setPagerPage(page));
-    return fetch(urlNew, createGetRequest())
+  dispatch(setPagerPage(page));
+  return fetch(urlNew, createGetRequest())
       .then(getResponseJson)
       .then(data => 
       {
         dispatch(setPagerTotal(data.total));
-        dispatch(addTodos(data.todos));
+        dispatch(page === 1? addTodos(data.todos) : attachTodos(data.todos));
       });
-  };
 };
 
 export const fetchInitialData = () => {
@@ -148,6 +154,13 @@ export const fetchInitialData = () => {
 const addTodos = (todos) => {
   return {
     type: Const.actions.ADD_TODOS,
+    todos
+  };
+};
+
+const attachTodos = (todos) => {
+  return {
+    type: Const.actions.ATTACH_TODOS,
     todos
   };
 };

@@ -4,6 +4,7 @@ import Const from '../utilities/constants';
 
 
 export const filter = (state = Immutable.Record(), action) => {
+
   switch (action.type) {
   case Const.actions.UPDATE_FILTER:
     return state.set(action.name, action.value);

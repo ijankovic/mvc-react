@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Todo from './Todo';
 import Immutable from 'immutable';
+import Const from '../utilities/constants';
 import { Table, Checkbox, Glyphicon } from 'react-bootstrap';
 import TodoListFilter from '../components/TodoListFilter';
 import NameIdRecord from '../../controls/models/NameIdRecord';
@@ -22,6 +23,7 @@ const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, 
             />
     ));
   const emptyRow = <tr><td>No data</td></tr>;
+
   return (
         <div className='area-container'>
             <h5 className='uppercase'>Tasks</h5>
@@ -42,13 +44,12 @@ const TodoList = ({ visibleTodos, users, page, hasMore, loadMore, onTodoUpdate, 
                     <Table className="table table-hover table-responsive">
                          <thead className="table-header">
                             <tr>
-                                <th className='col-md-1'><Checkbox onChange={(e) => onToggleAll(e.target.checked)} /></th>
-                                <th className='col-md-1'>Id</th>
-                                <th className='col-md-1'>Done</th>
-                                <th className='col-md-8'>Text</th>
-                                <th className='col-md-8'>Assigned</th>
-                                <th className='col-md-2'></th>
-                                <th className='col-md-2'></th>
+                                <th><Checkbox onChange={(e) => onToggleAll(e.target.checked)} /></th>
+                                <th className='col-xs-1'>Id</th>
+                                <th className='col-xs-1'>Done</th>
+                                <th className='col-xs-4'>Text</th>
+                                <th className='col-xs-2'>Assigned</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>{items.size == 0? emptyRow : items}</tbody>

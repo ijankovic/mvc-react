@@ -13,7 +13,7 @@ const todoApp = combineReducers({
   filter,
   visibilityFilter,
   isLoading,
-  pager
+  pager,
 });
 
 const initialState = new AppStateRecord();

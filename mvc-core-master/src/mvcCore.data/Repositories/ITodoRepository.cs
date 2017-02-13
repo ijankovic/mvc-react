@@ -10,6 +10,7 @@ namespace mvcCore.data.Repositories
 	{
 		Todo GetById(int id);
 		IQueryable<Todo> GetAll();
+		Tuple<int, IEnumerable<Todo>> GetByUserId(int? userId, int rangeFrom, int pageSize);
 		void UpdateRange(IEnumerable<Todo> todos);
 		void RemoveRange(int[] ids);
 		void Add(Todo todo);

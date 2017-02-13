@@ -33,13 +33,14 @@ namespace mvcCore.website.Controllers
 			return new ObjectResult(users);
 		}
 
-		[HttpGet("{pageSize}/{page}")]
-		public IActionResult GetTodos(int pageSize, int page = 1)
+		[HttpGet("{userId}/{pageSize}/{page}")]
+		public IActionResult GetTodos(int? userId, int pageSize, int page = 1)
 		{
-			var query = _todoRepo.GetAll();
-			var total = query.Count();
-			var todos = query.Skip((page - 1) * pageSize).Take(pageSize);
-			return new ObjectResult(new {total = total, todos = todos });
+			var rangeFrom = (page - 1) * pageSize;
+			var result = _todoRepo.GetByUserId(userId, rangeFrom, pageSize);
+			//var total = query.Count();
+			//var todos = query.Skip().Take(pageSize);
+			return new ObjectResult(new {total = result.Item1, todos = result.Item2 });
 		}
 
 		[HttpPost]
