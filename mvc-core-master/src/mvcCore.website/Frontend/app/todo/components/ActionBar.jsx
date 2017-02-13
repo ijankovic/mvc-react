@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import Alert from '../containers/Alert';
-import { Badge, ButtonToolbar } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 
-const ActionBar = ({disableDelete, disableSave, selectedCount, modifiedCount, total, onBulkDelete, onSave }) => {
+const ActionBar = ({disableDelete, disableSave, selectedCount, modifiedCount, onBulkDelete, onSave }) => {
   return (
         <div className='box2'>
                 <span>
@@ -30,7 +30,6 @@ ActionBar.propTypes = {
   disableSave: PropTypes.bool.isRequired,
   selectedCount: PropTypes.number.isRequired,
   modifiedCount: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
   onBulkDelete: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired
 };

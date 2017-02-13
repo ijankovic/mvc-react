@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react';
 import Todo from './Todo';
 import Immutable from 'immutable';
-import Const from '../utilities/constants';
-import { Table, Checkbox, Glyphicon } from 'react-bootstrap';
+import { Table, Checkbox } from 'react-bootstrap';
 import TodoListFilter from '../components/TodoListFilter';
-import NameIdRecord from '../../controls/models/NameIdRecord';
 import InfiniteScroll from '../../controls/InfiniteScroll';
 import HeaderActionBar from '../containers/HeaderActionBar';
 

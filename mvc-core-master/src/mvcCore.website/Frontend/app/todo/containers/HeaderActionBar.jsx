@@ -10,7 +10,6 @@ const mapStateToProps = (state) => {
   return {
     selectedCount: selectedCount,
     modifiedCount: modifiedCount,
-    total: state.todos.count(),
     disableDelete: selectedCount === 0,
     disableSave: modifiedCount === 0
   };

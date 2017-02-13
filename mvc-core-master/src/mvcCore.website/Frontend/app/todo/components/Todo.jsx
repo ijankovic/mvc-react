@@ -6,10 +6,8 @@ import { Checkbox } from 'react-bootstrap';
 import { Glyphicon } from 'react-bootstrap';
 import TextBox from '../../controls/TextBox';
 import {Dropdown } from '../../controls/Dropdown';
-import {NameIdRecord } from '../../controls/models/NameIdRecord';
 
 const Todo = ({todo, users, onComplete, onRemove, onUpdate, onSelected }) => {
-   debugger
   const completeText = !todo.isCompleted ? 'Complete' : 'Reopen';
   const checkMark = todo.isCompleted ? <Glyphicon className='text-success' glyph='ok'/> : null;
   return (

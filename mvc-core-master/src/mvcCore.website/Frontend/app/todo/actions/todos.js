@@ -1,12 +1,9 @@
 import Const from '../utilities/constants';
 import fetch from 'isomorphic-fetch';
-import { setLoadingState, setPagerPage, setPagerTotal } from './common';
+import { setPagerPage, setPagerTotal } from './common';
 
 const url = '/api/Todo';
-const getTodosUrl = '/api/Todo/pageSize/page/userId';
 
-const turnOffLoader = (dispatch) => dispatch(setLoadingState(false));
-const turnOnLoader = (dispatch) => dispatch(setLoadingState(true));
 const getResponseJson = response => response.json();
 
 const createRequest = (method, body) => ({
